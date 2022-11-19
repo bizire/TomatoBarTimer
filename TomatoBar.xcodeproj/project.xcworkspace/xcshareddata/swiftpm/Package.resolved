@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "purchases-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RevenueCat/purchases-ios.git",
+      "state" : {
+        "revision" : "19ef8ff3e3fb3c73d52a36b0db06b80d11b25853",
+        "version" : "4.14.2"
+      }
+    },
+    {
       "identity" : "swiftstate",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactKit/SwiftState",

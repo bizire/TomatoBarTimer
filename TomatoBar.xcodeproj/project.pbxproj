@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		054409E02929342600F16B55 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 054409DF2929342600F16B55 /* RevenueCat */; };
 		8A21B78C27EE31A20009E5DB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78B27EE31A20009E5DB /* App.swift */; };
 		8A21B78E27EE31A20009E5DB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78D27EE31A20009E5DB /* View.swift */; };
 		8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A21B78F27EE31A30009E5DB /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054409E02929342600F16B55 /* RevenueCat in Frameworks */,
 				8A7403A027FA19BB00E7F90B /* LaunchAtLogin in Frameworks */,
 				8AA5B3EB281295DB00BE1A6C /* KeyboardShortcuts in Frameworks */,
 				8A8CFE402821D8C300F9F303 /* SwiftState in Frameworks */,
@@ -105,6 +107,7 @@
 				8A74039F27FA19BB00E7F90B /* LaunchAtLogin */,
 				8AA5B3EA281295DB00BE1A6C /* KeyboardShortcuts */,
 				8A8CFE3F2821D8C300F9F303 /* SwiftState */,
+				054409DF2929342600F16B55 /* RevenueCat */,
 			);
 			productName = TomatoBar;
 			productReference = 8A21B78827EE31A20009E5DB /* TomatoBar.app */;
@@ -138,6 +141,7 @@
 				8A74039E27FA19BB00E7F90B /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				8AA5B3E9281295DB00BE1A6C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				8A8CFE3E2821D8C300F9F303 /* XCRemoteSwiftPackageReference "SwiftState" */,
+				054409DE2929342600F16B55 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = 8A21B78927EE31A20009E5DB /* Products */;
 			projectDirPath = "";
@@ -402,6 +406,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		054409DE2929342600F16B55 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		8A74039E27FA19BB00E7F90B /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
@@ -429,6 +441,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		054409DF2929342600F16B55 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054409DE2929342600F16B55 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
 		8A74039F27FA19BB00E7F90B /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8A74039E27FA19BB00E7F90B /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
