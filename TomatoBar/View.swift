@@ -161,6 +161,17 @@ struct TBPopoverView: View {
                 }
                 .buttonStyle(.plain)
                 .keyboardShortcut("a")
+                
+                Button {
+                    NSApp.activate(ignoringOtherApps: true)
+                    NSApp.orderFrontStandardAboutPanel()
+                } label: {
+                    Text("Upgrade")
+                    Spacer()
+                    Text("⌘ A").foregroundColor(Color.gray)
+                }
+                    .buttonStyle(.bordered)
+                
                 Button {
                     NSApplication.shared.terminate(self)
                 } label: {
@@ -187,7 +198,7 @@ struct TBPopoverView: View {
             )
         #endif
             /* Use values from GeometryReader */
-            .frame(width: 240, height: 247)
+            .frame(width: 300, height: 340)
             .padding(12)
     }
 }
