@@ -33,6 +33,7 @@ private struct IntervalsView: View {
                 Text("\(timer.workIntervalsInSet)")
             }
             .help("Number of working intervals in the set, after which a lengthy break taken")
+            .disabled(true)
             Spacer().frame(minHeight: 0)
         }
         .padding(4)
@@ -93,6 +94,7 @@ private struct SoundsView: View {
             .onChange(of: timer.isTickingEnabled) { _ in
                 timer.toggleTicking()
             }
+            .disabled(true)
             Spacer().frame(minHeight: 0)
         }
         .padding(4)

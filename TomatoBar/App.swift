@@ -1,5 +1,6 @@
 import SwiftUI
 import LaunchAtLogin
+import RevenueCat
 
 extension NSImage.Name {
     static let idle = Self("BarIconIdle")
@@ -17,6 +18,13 @@ struct TBApp: App {
     init() {
         TBStatusItem.shared = appDelegate
         LaunchAtLogin.migrateIfNeeded()
+        
+        Purchases.logLevel = .debug
+        Purchases.configure(
+            with:Configuration.Builder(withAPIKey: Constants.apiKey)
+                .with(usesStoreKit2IfAvailable: true)
+                .build()
+        )
     }
 
     var body: some Scene {
