@@ -8,7 +8,6 @@ import RevenueCat
 struct PaywallView: View {
     
     @ObservedObject var userModel = UserViewModel.shared
-    /// - This binding is passed from ContentView: `paywallPresented`
     //@Binding var isPresented: Bool
     
     /// - State for displaying an overlay view
@@ -32,8 +31,8 @@ struct PaywallView: View {
                     .padding()
                     .bold()
 
-                var packages = UserViewModel.shared.offerings?.current?.availablePackages ?? []
-                var package = packages[0]
+                let packages = UserViewModel.shared.offerings?.current?.availablePackages ?? []
+                let package = packages[0]
                 PackageCellView(package: package) { (package) in
                     /// - Set 'isPurchasing' state to `true`
                     isPurchasing = true

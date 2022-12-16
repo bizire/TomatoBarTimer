@@ -10,7 +10,6 @@
 		054409E02929342600F16B55 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 054409DF2929342600F16B55 /* RevenueCat */; };
 		054409E2292A074900F16B55 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054409E1292A074900F16B55 /* StoreKit.framework */; };
 		054409E8292A17CC00F16B55 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054409E7292A17CC00F16B55 /* Constants.swift */; };
-		05C0B3702931149A00B8165C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C0B36F2931149A00B8165C /* ContentView.swift */; };
 		05E8CFDD292CD22C00E1441C /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFDC292CD22C00E1441C /* PaywallView.swift */; };
 		05E8CFDF292CD2AB00E1441C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */; };
 		05E8CFE1292CD31100E1441C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFE0292CD31100E1441C /* Extensions.swift */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		054409E1292A074900F16B55 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		054409E7292A17CC00F16B55 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		05C0B36F2931149A00B8165C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		05E8CFDC292CD22C00E1441C /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		05E8CFE0292CD31100E1441C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 				05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */,
 				05E8CFE0292CD31100E1441C /* Extensions.swift */,
 				05E8CFE2292CD37300E1441C /* PurchasesDelegateHandler.swift */,
-				05C0B36F2931149A00B8165C /* ContentView.swift */,
 			);
 			path = Paywall;
 			sourceTree = "<group>";
@@ -221,7 +218,6 @@
 			files = (
 				8A9F701F27EE536D0012A1EC /* Player.swift in Sources */,
 				05E8CFDD292CD22C00E1441C /* PaywallView.swift in Sources */,
-				05C0B3702931149A00B8165C /* ContentView.swift in Sources */,
 				05E8CFE3292CD37300E1441C /* PurchasesDelegateHandler.swift in Sources */,
 				8A21B78E27EE31A20009E5DB /* View.swift in Sources */,
 				8A9F701927EE3DAF0012A1EC /* Timer.swift in Sources */,

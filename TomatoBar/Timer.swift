@@ -11,7 +11,7 @@ class TBTimer: ObservableObject {
     @AppStorage("isDingEnabled") var isDingEnabled = true
     @AppStorage("isTickingEnabled") var isTickingEnabled = true
     @AppStorage("stopAfterBreak") var stopAfterBreak = false
-    @AppStorage("showTimerInMenuBar") var showTimerInMenuBar = true
+    @AppStorage("showTimerInMenuBar") var showTimerInMenuBar = false
     @AppStorage("workIntervalLength") var workIntervalLength = 25
     @AppStorage("shortRestIntervalLength") var shortRestIntervalLength = 5
     @AppStorage("longRestIntervalLength") var longRestIntervalLength = 15

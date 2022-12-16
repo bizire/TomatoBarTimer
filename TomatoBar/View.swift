@@ -67,8 +67,16 @@ private struct SettingsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }.toggleStyle(.switch)
             Spacer().frame(minHeight: 0)
+            Text("Upgrade to unlock")
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding()
+                .italic(true)
+                //.background(Color.gray)
+                .cornerRadius(20)
+            Spacer().frame(minHeight: 0)
         }
         .padding(4)
+        .disabled(true)
     }
 }
 
@@ -95,7 +103,6 @@ private struct SoundsView: View {
             .onChange(of: timer.isTickingEnabled) { _ in
                 timer.toggleTicking()
             }
-            .disabled(true)
             Spacer().frame(minHeight: 0)
         }
         .padding(4)
@@ -112,6 +119,8 @@ struct TBPopoverView: View {
     @State private var activeChildView = ChildView.intervals
     @State private var showDetails = false
 
+    private var showAboutButton = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Button {
@@ -164,16 +173,19 @@ struct TBPopoverView: View {
             }
 
             Group {
-                Button {
-                    NSApp.activate(ignoringOtherApps: true)
-                    NSApp.orderFrontStandardAboutPanel()
-                } label: {
-                    Text("About")
-                    Spacer()
-                    Text("⌘ A").foregroundColor(Color.gray)
+                if (showAboutButton) {
+                    Button {
+                        NSApp.activate(ignoringOtherApps: true)
+                        NSApp.orderFrontStandardAboutPanel()
+                    } label: {
+                        Text("About")
+                        Spacer()
+                        Text("⌘ A").foregroundColor(Color.gray)
+                    }
+                    .buttonStyle(.plain)
+                    .keyboardShortcut("a")
+                    .hidden()
                 }
-                .buttonStyle(.plain)
-                .keyboardShortcut("a")
                 
                 Button {
                     if #available(macOS 13.0, *) {
@@ -198,33 +210,11 @@ struct TBPopoverView: View {
                     Spacer()
                     Text("⌘ Q").foregroundColor(Color.gray)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.bordered)
                 .keyboardShortcut("q")
             }
         }
-        #if DEBUG
-            /*
-             After several hours of Googling and trying various StackOverflow
-             recipes I still haven't figured a reliable way to auto resize
-             popover to fit all it's contents (pull requests are welcome!).
-             The following code block is used to determine the optimal
-             geometry of the popover.
-             */
-            .overlay(
-                GeometryReader { proxy in
-                    debugSize(proxy: proxy)
-                }
-            )
-        #endif
-            /* Use values from GeometryReader */
-            .frame(width: 300, height: 340)
-            .padding(12)
+        .frame(width: 300, height: 370)
+        .padding(12)
     }
 }
-
-#if DEBUG
-    func debugSize(proxy: GeometryProxy) -> some View {
-        print("Optimal popover size:", proxy.size)
-        return Color.clear
-    }
-#endif
