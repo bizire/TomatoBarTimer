@@ -1,6 +1,7 @@
 import KeyboardShortcuts
 import LaunchAtLogin
 import SwiftUI
+import RevenueCat
 
 extension KeyboardShortcuts.Name {
     static let startStopTimer = Self("startStopTimer")
@@ -109,6 +110,7 @@ struct TBPopoverView: View {
     @ObservedObject var timer = TBTimer()
     @State private var buttonHovered = false
     @State private var activeChildView = ChildView.intervals
+    @State private var showDetails = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -131,6 +133,15 @@ struct TBPopoverView: View {
             }
             .controlSize(.large)
             .keyboardShortcut(.defaultAction)
+            .task {
+                do {
+                    // Fetch the available offerings
+                    UserViewModel.shared.offerings = try await Purchases.shared.offerings()
+                    var x = print("ZDNPLX UserViewModel.offerings: \(UserViewModel.shared.offerings?.all)")
+                } catch {
+                    var x = print("ZDNPLX Error fetching offerings: \(error)")
+                }
+            }
 
             Picker("", selection: $activeChildView) {
                 Text("Intervals").tag(ChildView.intervals)
@@ -165,8 +176,14 @@ struct TBPopoverView: View {
                 .keyboardShortcut("a")
                 
                 Button {
-                    NSApp.activate(ignoringOtherApps: true)
-                    NSApp.orderFrontStandardAboutPanel()
+                    if #available(macOS 13.0, *) {
+                        print("showSettingsWindow")
+                        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+                        NSApp.activate(ignoringOtherApps: true)
+                    }
+                    else {
+                        NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+                    }
                 } label: {
                     Text("Upgrade")
                     Spacer()

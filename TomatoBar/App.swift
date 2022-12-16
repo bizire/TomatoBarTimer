@@ -25,12 +25,23 @@ struct TBApp: App {
                 .with(usesStoreKit2IfAvailable: true)
                 .build()
         )
+        /* Set the delegate to our shared instance of PurchasesDelegateHandler */
+        Purchases.shared.delegate = PurchasesDelegateHandler.shared
     }
 
     var body: some Scene {
         Settings {
-            EmptyView()
+            PaywallView()
+                .fixedSize()
+                .onAppear {
+                    DispatchQueue.main.async {
+                        NSApplication.shared.windows.forEach { window in
+                            window.standardWindowButton(.zoomButton)?.isEnabled = false
+                        }
+                    }
+                }
         }
+        .windowResizability(.contentSize)
     }
 }
 

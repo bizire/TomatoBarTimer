@@ -10,6 +10,11 @@
 		054409E02929342600F16B55 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 054409DF2929342600F16B55 /* RevenueCat */; };
 		054409E2292A074900F16B55 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054409E1292A074900F16B55 /* StoreKit.framework */; };
 		054409E8292A17CC00F16B55 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054409E7292A17CC00F16B55 /* Constants.swift */; };
+		05C0B3702931149A00B8165C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C0B36F2931149A00B8165C /* ContentView.swift */; };
+		05E8CFDD292CD22C00E1441C /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFDC292CD22C00E1441C /* PaywallView.swift */; };
+		05E8CFDF292CD2AB00E1441C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */; };
+		05E8CFE1292CD31100E1441C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFE0292CD31100E1441C /* Extensions.swift */; };
+		05E8CFE3292CD37300E1441C /* PurchasesDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFE2292CD37300E1441C /* PurchasesDelegateHandler.swift */; };
 		8A21B78C27EE31A20009E5DB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78B27EE31A20009E5DB /* App.swift */; };
 		8A21B78E27EE31A20009E5DB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78D27EE31A20009E5DB /* View.swift */; };
 		8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A21B78F27EE31A30009E5DB /* Assets.xcassets */; };
@@ -25,6 +30,11 @@
 /* Begin PBXFileReference section */
 		054409E1292A074900F16B55 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		054409E7292A17CC00F16B55 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		05C0B36F2931149A00B8165C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		05E8CFDC292CD22C00E1441C /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		05E8CFE0292CD31100E1441C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		05E8CFE2292CD37300E1441C /* PurchasesDelegateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelegateHandler.swift; sourceTree = "<group>"; };
 		8A21B78827EE31A20009E5DB /* TomatoBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A21B78B27EE31A20009E5DB /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		8A21B78D27EE31A20009E5DB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -52,6 +62,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05E8CFDB292CD1FC00E1441C /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				05E8CFDC292CD22C00E1441C /* PaywallView.swift */,
+				05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */,
+				05E8CFE0292CD31100E1441C /* Extensions.swift */,
+				05E8CFE2292CD37300E1441C /* PurchasesDelegateHandler.swift */,
+				05C0B36F2931149A00B8165C /* ContentView.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
 		8A21B77F27EE31A20009E5DB = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +94,7 @@
 		8A21B78A27EE31A20009E5DB /* TomatoBar */ = {
 			isa = PBXGroup;
 			children = (
+				05E8CFDB292CD1FC00E1441C /* Paywall */,
 				8A21B78B27EE31A20009E5DB /* App.swift */,
 				8A21B78D27EE31A20009E5DB /* View.swift */,
 				054409E7292A17CC00F16B55 /* Constants.swift */,
@@ -197,11 +220,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A9F701F27EE536D0012A1EC /* Player.swift in Sources */,
+				05E8CFDD292CD22C00E1441C /* PaywallView.swift in Sources */,
+				05C0B3702931149A00B8165C /* ContentView.swift in Sources */,
+				05E8CFE3292CD37300E1441C /* PurchasesDelegateHandler.swift in Sources */,
 				8A21B78E27EE31A20009E5DB /* View.swift in Sources */,
 				8A9F701927EE3DAF0012A1EC /* Timer.swift in Sources */,
 				8A21B78C27EE31A20009E5DB /* App.swift in Sources */,
+				05E8CFE1292CD31100E1441C /* Extensions.swift in Sources */,
 				054409E8292A17CC00F16B55 /* Constants.swift in Sources */,
 				8AA5B3F22812A74600BE1A6C /* Notifications.swift in Sources */,
+				05E8CFDF292CD2AB00E1441C /* UserViewModel.swift in Sources */,
 				8A9F700927EE396E0012A1EC /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,7 +287,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -313,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -344,7 +372,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zdnplx.mcos.tomato.timer.pomosh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -379,7 +407,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zdnplx.mcos.tomato.timer.pomosh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
