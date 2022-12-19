@@ -45,6 +45,7 @@ private struct SettingsView: View {
     @EnvironmentObject var timer: TBTimer
     @ObservedObject private var launchAtLogin = LaunchAtLogin.observable
 
+
     var body: some View {
         VStack {
             KeyboardShortcuts.Recorder(for: .startStopTimer) {
@@ -67,16 +68,18 @@ private struct SettingsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }.toggleStyle(.switch)
             Spacer().frame(minHeight: 0)
-            Text("Upgrade to unlock")
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding()
-                .italic(true)
-                //.background(Color.gray)
-                .cornerRadius(20)
+            if (UserViewModel.shared.customerInfo?.entitlements[Constants.entitlementID]?.isActive != true) {
+                Text("Upgrade to unlock")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding()
+                    .italic(true)
+                    //.background(Color.gray)
+                    .cornerRadius(20)
+            }
             Spacer().frame(minHeight: 0)
         }
         .padding(4)
-        .disabled(true)
+        .disabled(UserViewModel.shared.customerInfo?.entitlements[Constants.entitlementID]?.isActive != true)
     }
 }
 
@@ -146,9 +149,8 @@ struct TBPopoverView: View {
                 do {
                     // Fetch the available offerings
                     UserViewModel.shared.offerings = try await Purchases.shared.offerings()
-                    var x = print("ZDNPLX UserViewModel.offerings: \(UserViewModel.shared.offerings?.all)")
                 } catch {
-                    var x = print("ZDNPLX Error fetching offerings: \(error)")
+                    print("ZDNPLX Error fetching offerings: \(error)")
                 }
             }
 
@@ -187,21 +189,23 @@ struct TBPopoverView: View {
                     .hidden()
                 }
                 
-                Button {
-                    if #available(macOS 13.0, *) {
-                        print("showSettingsWindow")
-                        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-                        NSApp.activate(ignoringOtherApps: true)
+                if (UserViewModel.shared.customerInfo?.entitlements[Constants.entitlementID]?.isActive != true) {
+                    Button {
+                        if #available(macOS 13.0, *) {
+                            print("showSettingsWindow")
+                            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+                            NSApp.activate(ignoringOtherApps: true)
+                        }
+                        else {
+                            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+                        }
+                    } label: {
+                        Text("Upgrade to PRO")
+                        Spacer()
+                        Text("⌘ A").foregroundColor(Color.gray)
                     }
-                    else {
-                        NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
-                    }
-                } label: {
-                    Text("Upgrade to PRO")
-                    Spacer()
-                    Text("⌘ A").foregroundColor(Color.gray)
+                        .buttonStyle(.bordered)
                 }
-                    .buttonStyle(.bordered)
                 
                 Button {
                     NSApplication.shared.terminate(self)

@@ -2,8 +2,8 @@ import KeyboardShortcuts
 import SwiftState
 import SwiftUI
 
-private func secondsUntil(date: Date) -> Int {
-    return Int(date.timeIntervalSince(Date()))
+private func secondsUntil(date: Date?) -> Int {
+    return Int(date?.timeIntervalSince(Date()) ?? 0)
 }
 
 class TBTimer: ObservableObject {

@@ -7,7 +7,7 @@ import RevenueCat
  */
 struct PaywallView: View {
     
-    @ObservedObject var userModel = UserViewModel.shared
+    //@ObservedObject var userModel = UserViewModel.shared
     //@Binding var isPresented: Bool
     
     /// - State for displaying an overlay view
@@ -56,16 +56,16 @@ struct PaywallView: View {
                 }
             }
         .colorScheme(.dark)
-//        .alert(
-//            isPresented: self.$displayError,
-//            error: self.error,
-//            actions: { _ in
-//                Button(role: .cancel,
-//                       action: { self.displayError = false },
-//                       label: { Text("OK") })
-//            },
-//            message: { Text($0.recoverySuggestion ?? "Please try again") }
-//        )
+        .alert(
+            isPresented: self.$displayError,
+            error: self.error,
+            actions: { _ in
+                Button(role: .cancel,
+                       action: { self.displayError = false },
+                       label: { Text("OK") })
+            },
+            message: { Text($0.recoverySuggestion ?? "Please try again") }
+        )
     }
 }
 
