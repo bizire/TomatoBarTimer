@@ -197,7 +197,7 @@ struct TBPopoverView: View {
                         NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
                     }
                 } label: {
-                    Text("Upgrade")
+                    Text("Upgrade to PRO")
                     Spacer()
                     Text("⌘ A").foregroundColor(Color.gray)
                 }

@@ -25,8 +25,10 @@ struct PaywallView: View {
 
     var body: some View {
             VStack {
-                Text("• Unlock all features \n• Remove ad banners\n• Launch at login")
-                    .font(.title3)
+                Image("logo")
+                
+                Text("• Unlock All Features \n• Remove Ad Banners\n• Launch At Login\n• Eneable Hot Keys")
+                    .font(.title)
                     .multilineTextAlignment(.leading)
                     .padding()
                     .bold()
@@ -96,7 +98,7 @@ struct PackageCellView: View {
         HStack {
             VStack {
                 HStack {
-                    Text("UPGRADE for "+package.localizedPriceString + " $")
+                    Text("UPGRADE for "+package.localizedPriceString)
                         .font(.title3)
                         .bold()
                         .padding(.all, 15)
