@@ -14,6 +14,7 @@
 		05E8CFDF292CD2AB00E1441C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */; };
 		05E8CFE1292CD31100E1441C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFE0292CD31100E1441C /* Extensions.swift */; };
 		05E8CFE3292CD37300E1441C /* PurchasesDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8CFE2292CD37300E1441C /* PurchasesDelegateHandler.swift */; };
+		05F5FC1C295193E100585104 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05F5FC1B295193E100585104 /* Info.plist */; };
 		8A21B78C27EE31A20009E5DB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78B27EE31A20009E5DB /* App.swift */; };
 		8A21B78E27EE31A20009E5DB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78D27EE31A20009E5DB /* View.swift */; };
 		8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A21B78F27EE31A30009E5DB /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		05E8CFDE292CD2AB00E1441C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		05E8CFE0292CD31100E1441C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		05E8CFE2292CD37300E1441C /* PurchasesDelegateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelegateHandler.swift; sourceTree = "<group>"; };
+		05F5FC1B295193E100585104 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A21B78827EE31A20009E5DB /* TomatoBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A21B78B27EE31A20009E5DB /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		8A21B78D27EE31A20009E5DB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		8A21B78A27EE31A20009E5DB /* TomatoBar */ = {
 			isa = PBXGroup;
 			children = (
+				05F5FC1B295193E100585104 /* Info.plist */,
 				05E8CFDB292CD1FC00E1441C /* Paywall */,
 				8A21B78B27EE31A20009E5DB /* App.swift */,
 				8A21B78D27EE31A20009E5DB /* View.swift */,
@@ -184,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F5FC1C295193E100585104 /* Info.plist in Resources */,
 				8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,15 +359,15 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3.0;
 				DEVELOPMENT_TEAM = C44T395X8A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TomatoBar/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pomodoro Timer";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Ilya Voronin. All rights reserved. https://github.com/ivoronin/TomatoBar";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022  All rights reserved";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -390,15 +394,15 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3.0;
 				DEVELOPMENT_TEAM = C44T395X8A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TomatoBar/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pomodoro Timer";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Ilya Voronin. All rights reserved. https://github.com/ivoronin/TomatoBar";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022  All rights reserved";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
