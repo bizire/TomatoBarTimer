@@ -2,6 +2,10 @@
 import SwiftUI
 import RevenueCat
 
+private final class SomeViewState: ObservableObject {
+    @Published var alertMessage = "Alert"
+}
+
 /*
  An example paywall that uses the current offering.
  */
@@ -10,12 +14,16 @@ struct PaywallView: View {
     //@ObservedObject var userModel = UserViewModel.shared
     //@Binding var isPresented: Bool
     
+    @StateObject private var state = SomeViewState()
+    
     /// - State for displaying an overlay view
     @State
     private(set) var isPurchasing: Bool = false
     
     @State private var error: NSError?
     @State private var displayError: Bool = false
+    
+    @State private var showingAlert = false
     
     func someStuff() {
         print("Some Stufd")
@@ -54,6 +62,29 @@ struct PaywallView: View {
                         self.displayError = true
                     }
                 }
+                
+                Button {
+                    Purchases.shared.restorePurchases { (purchaserInfo, error) in
+                        if let error = error {
+                            state.alertMessage = error.localizedDescription
+                            showingAlert = true
+                        }
+                        //self.refreshUserDetails()
+                        state.alertMessage = "You have no any purchases"
+                        if ((purchaserInfo?.allPurchasedProductIdentifiers.isEmpty) != nil) {
+                            state.alertMessage = "All your Purchases have been restored"
+                        }
+                        showingAlert = true
+                    }
+                } label: {
+                    Text("Restore Purchases")
+                }
+                .alert(state.alertMessage, isPresented: $showingAlert) {
+                            Button("OK", role: .cancel) { }
+                }
+                .focusable(false)
+                .buttonStyle(.plain)
+                .padding(.all, 5)
             }
         .colorScheme(.dark)
         .alert(
