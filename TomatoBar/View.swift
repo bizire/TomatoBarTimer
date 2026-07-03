@@ -43,6 +43,7 @@ private struct IntervalsView: View {
 
 private struct SettingsView: View {
     @EnvironmentObject var timer: TBTimer
+    @ObservedObject private var userModel = UserViewModel.shared
     @ObservedObject private var launchAtLogin = LaunchAtLogin.observable
 
 
@@ -68,7 +69,7 @@ private struct SettingsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }.toggleStyle(.switch)
             Spacer().frame(minHeight: 0)
-            if (UserViewModel.shared.customerInfo?.entitlements[Constants.entitlementID]?.isActive != true) {
+            if !userModel.hasPremiumAccess {
                 Text("Upgrade to unlock")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding()
@@ -79,7 +80,7 @@ private struct SettingsView: View {
             Spacer().frame(minHeight: 0)
         }
         .padding(4)
-        .disabled(UserViewModel.shared.customerInfo?.entitlements[Constants.entitlementID]?.isActive != true)
+        .disabled(!userModel.hasPremiumAccess)
     }
 }
 
@@ -116,8 +117,38 @@ private enum ChildView {
     case intervals, settings, sounds
 }
 
+private struct UpgradeButton: View {
+    var body: some View {
+        if #available(macOS 14.0, *) {
+            SettingsLink {
+                label
+            }
+            .buttonStyle(.bordered)
+            .keyboardShortcut("a")
+        } else {
+            Button {
+                NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+                NSApp.activate(ignoringOtherApps: true)
+            } label: {
+                label
+            }
+            .buttonStyle(.bordered)
+            .keyboardShortcut("a")
+        }
+    }
+
+    private var label: some View {
+        HStack {
+            Text("Upgrade to PRO")
+            Spacer()
+            Text("⌘ A").foregroundColor(Color.gray)
+        }
+    }
+}
+
 struct TBPopoverView: View {
     @ObservedObject var timer = TBTimer()
+    @ObservedObject private var userModel = UserViewModel.shared
     @State private var buttonHovered = false
     @State private var activeChildView = ChildView.intervals
     @State private var showDetails = false
@@ -146,12 +177,7 @@ struct TBPopoverView: View {
             .controlSize(.large)
             .keyboardShortcut(.defaultAction)
             .task {
-                do {
-                    // Fetch the available offerings
-                    UserViewModel.shared.offerings = try await Purchases.shared.offerings()
-                } catch {
-                    print("ZDNPLX Error fetching offerings: \(error)")
-                }
+                await userModel.refreshRevenueCatState()
             }
 
             Picker("", selection: $activeChildView) {
@@ -189,22 +215,8 @@ struct TBPopoverView: View {
                     .hidden()
                 }
                 
-                if (UserViewModel.shared.customerInfo?.entitlements[Constants.entitlementID]?.isActive != true) {
-                    Button {
-                        if #available(macOS 13.0, *) {
-                            print("showSettingsWindow")
-                            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-                            NSApp.activate(ignoringOtherApps: true)
-                        }
-                        else {
-                            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
-                        }
-                    } label: {
-                        Text("Upgrade to PRO")
-                        Spacer()
-                        Text("⌘ A").foregroundColor(Color.gray)
-                    }
-                        .buttonStyle(.bordered)
+                if !userModel.hasPremiumAccess {
+                    UpgradeButton()
                 }
                 
                 Button {

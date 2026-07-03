@@ -21,11 +21,12 @@ extension PurchasesDelegateHandler: PurchasesDelegate {
      - Note: CustomerInfo is not pushed to each Purchases client, it has to be fetched.
      This delegate method is only called when the SDK updates its cache after an app launch, purchase, restore, or fetch.
      You still need to call `Purchases.shared.customerInfo` to fetch CustomerInfo regularly.
-     */
+    */
     func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
-        
-        /// - Update our published customerInfo object
-        UserViewModel.shared.customerInfo = customerInfo
+        DispatchQueue.main.async {
+            /// - Update our published customerInfo object
+            UserViewModel.shared.customerInfo = customerInfo
+        }
     }
 
     /**
@@ -37,7 +38,9 @@ extension PurchasesDelegateHandler: PurchasesDelegate {
                    purchase startPurchase: @escaping StartPurchaseBlock) {
         startPurchase { (transaction, info, error, cancelled) in
             if let info = info, error == nil, !cancelled {
-                UserViewModel.shared.customerInfo = info
+                DispatchQueue.main.async {
+                    UserViewModel.shared.customerInfo = info
+                }
             }
         }
     }

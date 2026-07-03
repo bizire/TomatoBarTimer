@@ -11,7 +11,7 @@ private final class SomeViewState: ObservableObject {
  */
 struct PaywallView: View {
     
-    //@ObservedObject var userModel = UserViewModel.shared
+    @ObservedObject private var userModel = UserViewModel.shared
     //@Binding var isPresented: Bool
     
     @StateObject private var state = SomeViewState()
@@ -41,40 +41,54 @@ struct PaywallView: View {
                     .padding()
                     .bold()
 
-                let packages = UserViewModel.shared.offerings?.current?.availablePackages ?? []
-                let package = packages[0]
-                PackageCellView(package: package) { (package) in
-                    /// - Set 'isPurchasing' state to `true`
-                    isPurchasing = true
-                    /// - Purchase a package
-                    do {
-                        let result = try await Purchases.shared.purchase(package: package)
+                let packages = userModel.offerings?.current?.availablePackages ?? []
+                if let package = packages.first {
+                    PackageCellView(package: package) { (package) in
+                        /// - Set 'isPurchasing' state to `true`
+                        isPurchasing = true
+                        /// - Purchase a package
+                        do {
+                            let result = try await Purchases.shared.purchase(package: package)
 
-                        /// - Set 'isPurchasing' state to `false`
-                        self.isPurchasing = false
+                            /// - Set 'isPurchasing' state to `false`
+                            self.isPurchasing = false
 
-                        if !result.userCancelled {
-                            //self.isPresented = false
+                            if !result.userCancelled {
+                                await MainActor.run {
+                                    UserViewModel.shared.customerInfo = result.customerInfo
+                                }
+                                //self.isPresented = false
+                            }
+                        } catch {
+                            self.isPurchasing = false
+                            if isPurchaseCancelled(error) {
+                                print("RevenueCat purchase cancelled by user or dismissed payment sheet.")
+                            } else {
+                                self.error = error as NSError
+                                self.displayError = true
+                            }
                         }
-                    } catch {
-                        self.isPurchasing = false
-                        self.error = error as NSError
-                        self.displayError = true
                     }
+                } else {
+                    ProgressView()
+                        .padding()
                 }
                 
                 Button {
                     Purchases.shared.restorePurchases { (purchaserInfo, error) in
-                        if let error = error {
-                            state.alertMessage = error.localizedDescription
+                        DispatchQueue.main.async {
+                            if let error = error {
+                                state.alertMessage = error.localizedDescription
+                            } else if let purchaserInfo {
+                                UserViewModel.shared.customerInfo = purchaserInfo
+                                state.alertMessage = purchaserInfo.allPurchasedProductIdentifiers.isEmpty
+                                    ? "You have no purchases"
+                                    : "All your purchases have been restored"
+                            } else {
+                                state.alertMessage = "You have no purchases"
+                            }
                             showingAlert = true
                         }
-                        //self.refreshUserDetails()
-                        state.alertMessage = "You have no any purchases"
-                        if ((purchaserInfo?.allPurchasedProductIdentifiers.isEmpty) != nil) {
-                            state.alertMessage = "All your Purchases have been restored"
-                        }
-                        showingAlert = true
                     }
                 } label: {
                     Text("Restore Purchases")
@@ -87,17 +101,27 @@ struct PaywallView: View {
                 .padding(.all, 5)
             }
         .colorScheme(.dark)
-        .alert(
-            isPresented: self.$displayError,
-            error: self.error,
-            actions: { _ in
-                Button(role: .cancel,
-                       action: { self.displayError = false },
-                       label: { Text("OK") })
-            },
-            message: { Text($0.recoverySuggestion ?? "Please try again") }
-        )
+        .task {
+            await userModel.refreshRevenueCatState()
+        }
+        .alert("Purchase failed", isPresented: self.$displayError, presenting: self.error) { _ in
+            Button(role: .cancel,
+                   action: { self.displayError = false },
+                   label: { Text("OK") })
+        } message: {
+            Text($0.localizedRecoverySuggestion ?? $0.localizedDescription)
+        }
     }
+}
+
+private func isPurchaseCancelled(_ error: Error) -> Bool {
+    if let revenueCatError = error as? RevenueCat.ErrorCode {
+        return revenueCatError == .purchaseCancelledError
+    }
+
+    let nsError = error as NSError
+    return nsError.code == RevenueCat.ErrorCode.purchaseCancelledError.rawValue
+        && nsError.userInfo["rc_code_name"] as? String == "PURCHASE_CANCELLED"
 }
 
 /* The cell view for each package */
@@ -140,12 +164,4 @@ struct PackageCellView: View {
         }
         .contentShape(Rectangle()) // Make the whole cell tappable
     }
-}
-
-extension NSError: LocalizedError {
-
-    public var errorDescription: String? {
-        return self.localizedDescription
-    }
-
 }
