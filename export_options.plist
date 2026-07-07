@@ -2,7 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>destination</key>
+	<string>upload</string>
+	<key>manageAppVersionAndBuildNumber</key>
+	<false/>
 	<key>method</key>
-	<string>mac-application</string>
+	<string>app-store-connect</string>
+	<key>teamID</key>
+	<string>C44T395X8A</string>
+	<key>uploadSymbols</key>
+	<true/>
 </dict>
 </plist>
