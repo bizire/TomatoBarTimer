@@ -22,7 +22,7 @@ struct TBApp: App {
         Purchases.logLevel = .debug
         Purchases.configure(
             with:Configuration.Builder(withAPIKey: Constants.apiKey)
-                .with(usesStoreKit2IfAvailable: true)
+                .with(storeKitVersion: .storeKit2)
                 .build()
         )
         /* Set the delegate to our shared instance of PurchasesDelegateHandler */
